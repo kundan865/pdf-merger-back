@@ -40,7 +40,10 @@ public class pdfMergeController {
                     .contentType(MediaType.APPLICATION_PDF)
                     .body(mergedPdf);
 
-        } catch (Exception e){
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
             return ResponseEntity
                     .internalServerError()
                     .build();
