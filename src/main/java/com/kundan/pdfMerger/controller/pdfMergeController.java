@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/pdf-merger")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class pdfMergeController {
 
     private final PdfService pdfService;
