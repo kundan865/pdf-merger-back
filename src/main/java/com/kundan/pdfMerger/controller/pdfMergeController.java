@@ -3,6 +3,7 @@ package com.kundan.pdfMerger.controller;
 import com.kundan.pdfMerger.service.PdfService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class pdfMergeController {
             value = "/merge",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )
-    public ResponseEntity<byte[]> mergePdfs(
+    public ResponseEntity<?> mergePdfs(
             @RequestParam("files") MultipartFile[] files
     ) {
 
@@ -45,8 +46,9 @@ public class pdfMergeController {
             e.printStackTrace();
 
             return ResponseEntity
-                    .internalServerError()
-                    .build();
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .contentType(MediaType.TEXT_PLAIN)
+                    .body("PDF merge failed: " + e.getMessage());
         }
     }
 }
